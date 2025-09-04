@@ -1,16 +1,229 @@
 <!DOCTYPE html>
-
 <html>
+  <head>
+    <title>
+      Replit Asian Paints
+    </title>
+    <style>
+      .container{
+        display: grid;
+        grid-template-columns: repeat(3,50px);
+        grid-template-rows: repeat(3,50px);
+        gap : 10px;
+        justify-content: center;;
+        
+      }
+      .grid-items{
+        border: 2px solid black;
+        font-size: 1rem;
+        /*text-align: center;
+        align-items: center;*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .actions{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        gap : 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class = "container">
+      <div class="grid-items" id = 1>1</div>
+      <div class="grid-items" id = 2>2</div>
+      <div class="grid-items" id = 3>3</div>
+      <div class="grid-items" id = 4>4</div>
+      <div class="grid-items" id = 5>5</div>
+      <div class="grid-items" id = 6>6</div>
+      <div class="grid-items" id = 7>7</div>
+      <div class="grid-items" id = 8>8</div>
+      <div class="grid-items" id = 9>9</div>
+    </div>
+    <form class="actions">
+      <label for="selectBox">Select Box</label>
+      <input type="text" id="selectBox" required>
+      <label for="enterColor">Enter Color</label>
+      <input type="text" id="enterColor" required>
+      <input type="submit" value = "submit">
+    </form>
+    <script>
+      //const selectedBox = document.getElementById("selectBox");
+      //const enteredColor = document.getElementById("enterColor");
+      const form = document.querySelector(".actions");
+      const boxes = document.querySelectorAll(".grid-items");
+      form.addEventListener("submit",getAndApplyColor);
+    
+      function getAndApplyColor(e){
+        e.preventDefault();
+        const selectedBox = e.target[0].value;
+        const enteredColor = e.target[1].value;
+        if(parseInt(selectedBox)>0 && parseInt(selectedBox)<10){
+          e.target.reset();
+          clearBg();
+          const targetBox = document.getElementById(selectedBox);
+        targetBox.style.backgroundColor = enteredColor;
+        }else{
+          alert("Enter Valid box number");
+        }
+        //const targetBox = document.getElementById(selectedBox);
+        //clearBg();
+        //targetBox.style.backgroundColor = enteredColor;
+        console.log(selectedBox, enteredColor);
+      }
+      function clearBg(){
+        for(box of boxes){
+          box.style.backgroundColor = "transparent";
 
-<head>
-	<link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
-
-</body>
-
+        }
+      }
+    </script>
+  </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
