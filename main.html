@@ -3,19 +3,20 @@
 <head>
   <title>Replit Asian Paints</title>
   <style>
-    .container {
+    .grid-container {
       display: grid;
       grid-template-columns: repeat(3, 50px);
       grid-template-rows: repeat(3, 50px);
       gap: 10px;
       justify-content: center;
     }
-    .grid-items {
+    .grid-item {
       border: 2px solid black;
       font-size: 1rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: transparent;
     }
     .actions {
       display: flex;
@@ -24,63 +25,53 @@
       padding: 10px;
       gap: 1rem;
     }
-    #errorMsg {
-      text-align: center;
-      color: red;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="grid-items" id="box-1">1</div>
-    <div class="grid-items" id="box-2">2</div>
-    <div class="grid-items" id="box-3">3</div>
-    <div class="grid-items" id="box-4">4</div>
-    <div class="grid-items" id="box-5">5</div>
-    <div class="grid-items" id="box-6">6</div>
-    <div class="grid-items" id="box-7">7</div>
-    <div class="grid-items" id="box-8">8</div>
-    <div class="grid-items" id="box-9">9</div>
+  <div class="grid-container">
+    <div class="grid-item" id="box-1">1</div>
+    <div class="grid-item" id="box-2">2</div>
+    <div class="grid-item" id="box-3">3</div>
+    <div class="grid-item" id="box-4">4</div>
+    <div class="grid-item" id="box-5">5</div>
+    <div class="grid-item" id="box-6">6</div>
+    <div class="grid-item" id="box-7">7</div>
+    <div class="grid-item" id="box-8">8</div>
+    <div class="grid-item" id="box-9">9</div>
   </div>
 
-  <form class="actions">
-    <label for="selectBox">Select Box</label>
-    <input type="text" id="selectBox" required>
-    <label for="enterColor">Enter Color</label>
-    <input type="text" id="enterColor" required>
-    <input type="submit" value="submit">
-  </form>
-
-  <p id="errorMsg"></p>
+  <div class="actions">
+    <label for="block_id">Select Box</label>
+    <input type="text" id="block_id" required>
+    <label for="colour_id">Enter Color</label>
+    <input type="text" id="colour_id" required>
+    <button id="change_button">Change</button>
+    <button id="reset_button" type="button">Reset</button>
+  </div>
 
   <script>
-    // core function (judge can call this directly)
     function paintBox(selectedBox, enteredColor) {
-      const errorMsg = document.getElementById("errorMsg");
-      errorMsg.textContent = "";
-
       if (/^[1-9]$/.test(selectedBox)) {
-        // Reset all boxes first
-        const allBoxes = document.querySelectorAll(".grid-items");
-        allBoxes.forEach(box => box.style.backgroundColor = "transparent");
-
-        // Then color only the selected one
-        const targetBox = document.getElementById("box-" + selectedBox);
-        targetBox.style.backgroundColor = enteredColor;
-      } else {
-        errorMsg.textContent = "Enter a valid box number (1-9)";
+        // reset all first
+        document.querySelectorAll(".grid-item")
+          .forEach(box => box.style.backgroundColor = "transparent");
+        // then color the chosen one
+        document.getElementById("box-" + selectedBox).style.backgroundColor = enteredColor;
       }
     }
 
-    // event listener for manual input
-    const form = document.querySelector(".actions");
-    form.addEventListener("submit", function(e) {
+    document.getElementById("change_button").addEventListener("click", function(e) {
       e.preventDefault();
-      const selectedBox = e.target[0].value.trim();
-      const enteredColor = e.target[1].value.trim();
+      const selectedBox = document.getElementById("block_id").value.trim();
+      const enteredColor = document.getElementById("colour_id").value.trim();
       paintBox(selectedBox, enteredColor);
-      e.target.reset();
+      document.getElementById("block_id").value = "";
+      document.getElementById("colour_id").value = "";
+    });
+
+    document.getElementById("reset_button").addEventListener("click", function() {
+      document.querySelectorAll(".grid-item")
+        .forEach(box => box.style.backgroundColor = "transparent");
     });
   </script>
 </body>
